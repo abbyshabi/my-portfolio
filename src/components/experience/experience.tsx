@@ -127,9 +127,8 @@ function FlipCard({ front, back }: { front: React.ReactNode; back: React.ReactNo
       className="relative w-full text-left perspective-1000 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500/60 rounded-2xl"
     >
       <div
-        className={`relative h-full min-h-[160px] w-full preserve-3d motion-safe:transition-transform motion-safe:duration-500 ${
-          flipped ? "rotate-y-180" : ""
-        }`}
+        className={`relative h-full min-h-[160px] w-full preserve-3d motion-safe:transition-transform motion-safe:duration-500 ${flipped ? "rotate-y-180" : ""
+          }`}
         style={{ transformStyle: "preserve-3d" }}
       >
         <div className="backface-hidden absolute inset-0">{front}</div>
@@ -143,10 +142,9 @@ function FlipCard({ front, back }: { front: React.ReactNode; back: React.ReactNo
 
 export default function Experience() {
   return (
-    <section className="relative isolate overflow-hidden py-20 transition-colors">
+    <section id="experience" className="relative isolate overflow-hidden py-20 transition-colors">
       {/* Light = flat white. Dark = gradient backdrop. */}
-      <div className="absolute inset-0 -z-10 bg-white dark:bg-[linear-gradient(to_bottom,#0b1220,#0d1324,#0f172a)]" />
-
+      <div className="absolute inset-0 -z-10"></div>
       <div className="mx-auto max-w-[1100px] px-6 md:px-10">
         {/* Title */}
         <div className="mb-12 text-center">
@@ -177,9 +175,8 @@ export default function Experience() {
               <div key={i} className={`relative ${left ? "" : "md:col-start-2"}`}>
                 {/* Connector dot */}
                 <div
-                  className={`absolute top-1/2 hidden -translate-y-1/2 md:block ${
-                    left ? "right-[-28px]" : "left-[-28px]"
-                  }`}
+                  className={`absolute top-1/2 hidden -translate-y-1/2 md:block ${left ? "right-[-28px]" : "left-[-28px]"
+                    }`}
                 >
                   <GlowDot />
                 </div>

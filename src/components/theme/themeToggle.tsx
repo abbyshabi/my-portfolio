@@ -21,7 +21,7 @@ export function ThemeToggle() {
       aria-label="Toggle theme"
     >
       {isDark ? <Sun size={16} /> : <Moon size={16} />}
-      <span className="hidden sm:inline">{isDark ? "Light" : "Dark"} mode</span>
+      {/* <span className="hidden sm:inline">{isDark ? "Light" : "Dark"} mode</span> */}
     </button>
   );
 }
