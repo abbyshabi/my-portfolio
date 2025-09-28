@@ -7,8 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "export": "next export",
-    "build:static": "next build && next export"
+    "build:static": "next build "
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",
