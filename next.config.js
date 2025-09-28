@@ -3,7 +3,7 @@ const isProd = process.env.NODE_ENV === 'production'
 
 module.exports = {
   output: 'export', // create static HTML
-  basePath: isProd ? '/my-portfolio' : '',
+  basePath:'',
   assetPrefix: isProd ? '/my-portfolio/' : '',
   images: { unoptimized: true }, // GH Pages has no Next image optimizer
   trailingSlash: true,
