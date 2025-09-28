@@ -109,12 +109,12 @@ export function ContactSection() {
 
     return (
         <section className="relative isolate py-12 md:py-16" id="contact">
-           <div className="pointer-events-none absolute inset-y-0 left-1/2 -z-10 w-screen -translate-x-1/2">
-  {/* light */}
-  <div className="h-full bg-[oklch(0.97_0_0)] dark:hidden" />
-  {/* dark */}
-  <div className="hidden h-full dark:block bg-[radial-gradient(60%_50%_at_18%_12%,rgba(56,189,248,.14),transparent_60%),radial-gradient(55%_45%_at_85%_30%,rgba(217,70,239,.12),transparent_60%),linear-gradient(180deg,#142238_0%,#122033_55%,#0d1627_100%)]" />
-</div>
+            <div className="pointer-events-none absolute inset-y-0 left-1/2 -z-10 w-screen -translate-x-1/2">
+                {/* light */}
+                <div className="h-full bg-[oklch(0.97_0_0)] dark:hidden" />
+                {/* dark */}
+                <div className="hidden h-full dark:block bg-[radial-gradient(60%_50%_at_18%_12%,rgba(56,189,248,.14),transparent_60%),radial-gradient(55%_45%_at_85%_30%,rgba(217,70,239,.12),transparent_60%),linear-gradient(180deg,#142238_0%,#122033_55%,#0d1627_100%)]" />
+            </div>
             <div className="mx-auto max-w-[1100px] px-6 md:px-10">
                 <div className="mb-10 text-center">
                     <h2 className="text-4xl font-bold tracking-tight text-slate-900 dark:text-white">
@@ -139,7 +139,7 @@ export function ContactSection() {
                                     abbyshabi@gmail.com
                                 </a>
                             </li>
-                          
+
                             <li className="flex items-center gap-3">
                                 <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-cyan-50 text-cyan-600 dark:bg-white/10 dark:text-cyan-300">
                                     <MapPin size={18} />
