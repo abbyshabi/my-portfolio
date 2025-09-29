@@ -17,14 +17,18 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-     <body className="min-h-screen bg-white text-foreground dark:bg-[#0a0f1e]">
+    // app/layout.tsx
+    <html lang="en" suppressHydrationWarning className="w-full overflow-x-clip overscroll-none touch-pan-y">
+      <body className="min-h-screen bg-white text-foreground dark:bg-[#0a0f1e] overflow-x-clip overscroll-none touch-pan-y">
         <ThemeProvider>
           <Navbar />
-          <main id="main" className="pb-10">{children}</main>
+          <main id="main" className="relative overflow-x-clip overscroll-none touch-pan-y pb-10">
+            {children}
+          </main>
           <Footer />
         </ThemeProvider>
       </body>
     </html>
+
   );
 }

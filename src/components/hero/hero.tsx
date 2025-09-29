@@ -8,7 +8,7 @@ export function Hero() {
     return (
         <section id="home" className="relative py-16 md:py-20">
             {/* FULL-BLEED BACKGROUND */}
-            <div className="pointer-events-none absolute inset-y-0 left-1/2 -z-10 w-screen -translate-x-1/2">
+            <div className="pointer-events-none absolute inset-y-0 left-1/2 -z-10 w-[100vw] -translate-x-1/2">
                 {/* Light */}
                 <div className="h-[700px] bg-[oklch(0.94_0.045_100)] dark:hidden" />
 

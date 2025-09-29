@@ -70,7 +70,7 @@ export function Skills() {
   return (
     <section id="skills" className="relative isolate py-12 md:py-16">
       {/* FULL-BLEED BACKGROUND (light wash / dark navy gradient) */}
-      <div className="pointer-events-none absolute inset-y-0 left-1/2 -z-10 w-screen -translate-x-1/2">
+      <div className="pointer-events-none absolute inset-y-0 left-1/2 -z-10 w-[100vw] -translate-x-1/2">
         <div className="h-full bg-[oklch(0.97_0_0)] dark:hidden" />
         <div className="hidden h-full dark:block bg-[radial-gradient(60%_50%_at_18%_12%,rgba(56,189,248,.18),transparent_60%),radial-gradient(55%_45%_at_85%_30%,rgba(217,70,239,.16),transparent_60%),linear-gradient(180deg,#142238_0%,#122033_55%,#0d1627_100%)]" />
       </div>

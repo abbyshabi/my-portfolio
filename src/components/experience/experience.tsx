@@ -16,7 +16,6 @@ type Item = {
 const items: Item[] = [
   {
     title: "Senior Frontend Engineer",
-    subtitle: "Current Role",
     org: "Probound.ai",
     period: "Jul 2025 — Present",
     side: "left",
@@ -25,14 +24,12 @@ const items: Item[] = [
     backTitle: "Key Deliverables & Tech",
     backBullets: [
       "Next.js + React (TS), shadcn/ui, Tailwind",
-      "Design-system primitives, Storybook",
       "Figma Dev Mode → code tooling",
       "Perf budgets, bundle trims, RUM",
     ],
   },
   {
     title: "Software Engineer (Contract)",
-    subtitle: "Enterprise",
     org: "Cisco",
     period: "Nov 2023 — Mar 2024",
     side: "right",
@@ -80,7 +77,6 @@ const items: Item[] = [
 function GlowDot() {
   return (
     <div className="relative z-10 h-4 w-4 rounded-full bg-white">
-      {/* softer glow in light, stronger in dark */}
       <span className="absolute inset-0 rounded-full shadow-[0_0_22px_6px_rgba(14,165,233,0.35)] dark:shadow-[0_0_30px_8px_rgba(59,130,246,0.6)]" />
       <span className="absolute inset-0 rounded-full ring-2 ring-cyan-500/45 dark:ring-0" />
     </div>
@@ -97,15 +93,14 @@ function Pill({ children }: { children: React.ReactNode }) {
 
 function CardChrome({ children }: { children: React.ReactNode }) {
   return (
-    <div className="relative rounded-2xl border border-slate-200 bg-white p-6 shadow-[0_12px_28px_rgba(2,6,23,0.06)] ring-1 ring-slate-100 backdrop-blur dark:border-white/10 dark:bg-white/5 dark:ring-white/5 dark:shadow-[0_10px_40px_rgba(0,0,0,0.4)]">
-      {/* no chroma in light; neon edge only in dark */}
+    <div className="relative h-full rounded-2xl border border-slate-200 bg-white p-6 shadow-[0_12px_28px_rgba(2,6,23,0.06)] ring-1 ring-slate-100 backdrop-blur dark:border-white/10 dark:bg-white/5 dark:ring-white/5 dark:shadow-[0_10px_40px_rgba(0,0,0,0.4)]">
       <div className="pointer-events-none absolute -inset-px rounded-2xl bg-transparent dark:bg-[linear-gradient(90deg,rgba(14,165,233,0.10),rgba(56,189,248,0.10),rgba(16,185,129,0.10))] [mask-image:linear-gradient(to_bottom,black,transparent_25%,transparent_75%,black)]" />
-      <div className="relative">{children}</div>
+      <div className="relative h-full">{children}</div>
     </div>
   );
 }
 
-/* ── Flip card (with keyboard + reduced motion) ───────────────────────── */
+/* ── Flip card: fixed responsive height + scrollable faces ───────────── */
 
 function FlipCard({ front, back }: { front: React.ReactNode; back: React.ReactNode }) {
   const [flipped, setFlipped] = React.useState(false);
@@ -124,15 +119,35 @@ function FlipCard({ front, back }: { front: React.ReactNode; back: React.ReactNo
           onActivate();
         }
       }}
-      className="relative w-full text-left perspective-1000 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500/60 rounded-2xl"
+      className="relative w-full text-left rounded-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500/60"
+      style={{ isolation: "isolate" }}
     >
+      {/* The wrapper has a fixed height via CSS var */}
       <div
-        className={`relative h-full min-h-[160px] w-full preserve-3d motion-safe:transition-transform motion-safe:duration-500 ${flipped ? "rotate-y-180" : ""
-          }`}
-        style={{ transformStyle: "preserve-3d" }}
+        className={`relative w-full preserve-3d motion-safe:transition-transform motion-safe:duration-500 ${flipped ? "rotate-y-180" : ""}`}
+        style={{
+          height: "var(--card-h)",
+          transformStyle: "preserve-3d",
+        }}
       >
-        <div className="backface-hidden absolute inset-0">{front}</div>
-        <div className="backface-hidden absolute inset-0 rotate-y-180">{back}</div>
+        {/* FRONT */}
+        <div className="backface-hidden absolute inset-0">
+          <CardChrome>
+            {/* Make the face content scroll if taller than card */}
+            <div className="h-full overflow-y-auto pr-1">
+              {front}
+            </div>
+          </CardChrome>
+        </div>
+
+        {/* BACK */}
+        <div className="backface-hidden absolute inset-0" style={{ transform: "rotateY(180deg)" }}>
+          <CardChrome>
+            <div className="h-full overflow-y-auto pr-1">
+              {back}
+            </div>
+          </CardChrome>
+        </div>
       </div>
     </div>
   );
@@ -142,15 +157,23 @@ function FlipCard({ front, back }: { front: React.ReactNode; back: React.ReactNo
 
 export default function Experience() {
   return (
-    <section id="experience" className="relative isolate overflow-hidden py-20 transition-colors">
-      {/* Light = flat white. Dark = gradient backdrop. */}
-      <div className="absolute inset-0 -z-10"></div>
+    <section
+      id="experience"
+      className="relative isolate overflow-hidden py-20 pb-28 md:pb-24 transition-colors"
+      /* Set consistent heights once, per breakpoint */
+      style={
+        {
+          // mobile default
+          // You can tune these numbers
+          ["--card-h" as any]: "260px",
+        }
+      }
+    >
+      <div className="absolute inset-0 -z-10" />
       <div className="mx-auto max-w-[1100px] px-6 md:px-10">
-        {/* Title */}
         <div className="mb-12 text-center">
           <h2 className="text-4xl font-bold tracking-tight text-slate-900 dark:text-white">
             Professional{" "}
-            {/* Solid cyan in light; gradient only in dark */}
             <span className="text-cyan-600 dark:bg-gradient-to-r dark:from-cyan-500 dark:via-sky-500 dark:to-emerald-500 dark:bg-clip-text dark:text-transparent">
               Journey
             </span>
@@ -160,12 +183,11 @@ export default function Experience() {
           </p>
         </div>
 
-        {/* Timeline grid */}
         <div className="relative mx-auto grid max-w-none grid-cols-1 gap-10 md:grid-cols-2">
-          {/* Center rail */}
+          {/* Center rail (desktop) */}
           <div className="pointer-events-none absolute left-1/2 top-0 hidden h-full -translate-x-1/2 md:block">
             <div className="relative mx-auto h-full w-1 rounded-full bg-cyan-400 opacity-60 dark:bg-gradient-to-b dark:from-cyan-500 dark:via-sky-500 dark:to-emerald-500 dark:opacity-80">
-              <div className="absolute inset-0 blur-[10px] bg-gradient-to-b from-cyan-400/25 to-cyan-400/25 dark:from-cyan-400 dark:via-sky-400 dark:to-emerald-400" />
+              <div className="absolute inset-0 bg-gradient-to-b from-cyan-400/25 to-cyan-400/25 blur-[10px] dark:from-cyan-400 dark:via-sky-400 dark:to-emerald-400" />
             </div>
           </div>
 
@@ -173,18 +195,18 @@ export default function Experience() {
             const left = it.side === "left";
             return (
               <div key={i} className={`relative ${left ? "" : "md:col-start-2"}`}>
-                {/* Connector dot */}
+                {/* Connector dot (desktop only) */}
                 <div
-                  className={`absolute top-1/2 hidden -translate-y-1/2 md:block ${left ? "right-[-28px]" : "left-[-28px]"
-                    }`}
+                  className={`absolute top-1/2 hidden -translate-y-1/2 md:block ${
+                    left ? "right-[-28px]" : "left-[-28px]"
+                  }`}
                 >
                   <GlowDot />
                 </div>
 
-                {/* Flip card */}
                 <FlipCard
                   front={
-                    <CardChrome>
+                    <>
                       <div className="flex items-start justify-between gap-4">
                         <div>
                           <h3 className="text-xl font-semibold text-slate-900 dark:text-white">
@@ -203,13 +225,15 @@ export default function Experience() {
                         </div>
                         <Pill>Tap to flip</Pill>
                       </div>
-                      <p className="mt-3 text-sm leading-[1.55] text-slate-700 dark:text-white/80">
+
+                      {/* Optional: clamp front summary to keep visual rhythm */}
+                      <p className="mt-3 text-sm leading-[1.55] text-slate-700 dark:text-white/80 line-clamp-5">
                         {it.summary}
                       </p>
-                    </CardChrome>
+                    </>
                   }
                   back={
-                    <CardChrome>
+                    <>
                       <h4 className="text-sm font-semibold text-slate-900 dark:text-white/90">
                         {it.backTitle ?? "Details"}
                       </h4>
@@ -224,7 +248,7 @@ export default function Experience() {
                       <div className="mt-4 text-xs text-slate-500 dark:text-white/50">
                         Tap to flip back
                       </div>
-                    </CardChrome>
+                    </>
                   }
                 />
               </div>
@@ -232,6 +256,20 @@ export default function Experience() {
           })}
         </div>
       </div>
+
+      {/* Helpers + responsive height */}
+      <style jsx global>{`
+        .preserve-3d { transform-style: preserve-3d; }
+        .backface-hidden { backface-visibility: hidden; }
+        @media (min-width: 768px) {
+          #experience { --card-h: 220px; }  /* tablet/desktop */
+        }
+        @media (min-width: 1280px) {
+          #experience { --card-h: 200px; }  /* big screens */
+        }
+        /* optional: hide mobile scrollbar track for cleaner look */
+        .no-scrollbar::-webkit-scrollbar { width: 0; height: 0; }
+      `}</style>
     </section>
   );
 }
